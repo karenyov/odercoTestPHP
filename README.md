@@ -157,14 +157,18 @@ Lista as  3 melhores cotações.
                         "uf": "SP",
                         "transportadora_id": 1,
                         "percentual_cotacao": "1.20",
-                        "valor_extra": "7.00"
+                        "valor_extra": "7.00",
+                        "valor_cotacao": "9.00",
+                        "transportadora": "TNT Mercúrio Cargas e Encomendas Expressas",
                     },
                     {
                         "id": 8,
                         "uf": "SP",
                         "transportadora_id": 2,
                         "percentual_cotacao": "1.90",
-                        "valor_extra": "10.00"
+                        "valor_extra": "10.00",
+                        "valor_cotacao": "10.00",
+                        "transportadora": "TNT Mercúrio Cargas e Encomendas Expressas",
                     }
                 ],
                 "message": "Cotações carregadas com sucesso."

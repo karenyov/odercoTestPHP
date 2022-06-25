@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CotacaoFrete as CotacaoFrete;
 use App\Http\Resources\CotacaoFreteResource as CotacaoFreteResource;
+use App\Http\Resources\CotacaoFreteMelhoresResource as CotacaoFreteMelhoresResource;
 use App\Http\Resources\UfResource as UfResource;
 use App\Http\Requests\CotacaoFreteRequest;
 use App\Repositories\CotacaoFreteRepositoryInterface as CotacaoFreteRepositoryInterface;
@@ -45,7 +46,7 @@ class CotacaoFreteController extends BaseController
         $cotacoes = $this->cotacaoFreteRepository->calcularImposto($input['uf'], (float)$input['valor_pedido']);
 
         if (count($cotacoes) > 0)
-            return $this->sendResponse(CotacaoFreteResource::collection($cotacoes), 'Cotações carregadas com sucesso.');
+            return $this->sendResponse(CotacaoFreteMelhoresResource::collection($cotacoes), 'Cotações carregadas com sucesso.');
         else
             return $this->sendError('Cotação não cadastrada o UF.');
 

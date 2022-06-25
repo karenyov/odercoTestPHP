@@ -37,9 +37,13 @@ class CotacaoFreteRepository extends BaseRepository implements CotacaoFreteRepos
     public function calcularImposto($uf, $valor_pedido): Collection
     {
         return DB::table('cotacao_frete')
+            ->join('transportadora', 'transportadora.id', '=', 'cotacao_frete.transportadora_id')
             ->where('uf', $uf)
             ->orderBy(DB::raw("((($valor_pedido / 100) * percentual_cotacao) + valor_extra)"), 'ASC')
             ->limit(3)
+            ->select('cotacao_frete.*', 'transportadora.nome as transportadora',
+                DB::raw("((($valor_pedido / 100) * percentual_cotacao) + valor_extra) as valor_cotacao")
+            )
             ->get();
     }
 

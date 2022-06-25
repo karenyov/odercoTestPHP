@@ -1,6 +1,10 @@
 # Teste Oderço PHP
 Teste Oderço
 
+## Requisitos
+- [Docker](https://docs.docker.com/engine/install/).
+
+
 ## Instalação
 
 Baixando o projeto.

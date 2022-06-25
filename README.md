@@ -18,7 +18,7 @@ Alterar o arquivo .env.example (remover o .example) e deixar as configurações 
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=jn2_db
+DB_DATABASE=cotacaodb
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
@@ -34,7 +34,6 @@ php artisan key:generate
 php artisan migrate
 php artisan db:seed
 ```
-
 
 ## Estrutura do Projeto
 ```sh
@@ -85,3 +84,99 @@ php artisan db:seed
 ├── server.php
 └── webpack.mix.js
 ```
+
+## ENDPOINTS
+
+### ENDPOINT - `api/cotacao`
+
+#### [POST] - `api/cotacao`
+| Parâmetro | Descrição |
+|---|---|
+| `uf` | Nome da Marca |
+| `percentual_cotacao` | Percentual de Cotação |
+| `valor_extra` | Valor Extra |
+| `transportadora_id` | Transportadora ID |
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "uf" : "PR",
+                "percentual_cotacao" : 2.95,
+                "valor_extra" : 14.35,
+                "transportadora_id" : 1
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true,
+                "data": {
+                    "id": 1,
+                    "uf": "PR",
+                    "transportadora_id": 1,
+                    "percentual_cotacao": 2.95,
+                    "valor_extra": 14.35
+                },
+                "message": "Cotação inserida com sucesso."
+            }
+
+#### [PUT] - `api/cotacao`
+Lista as  3 melhores cotações.
+
+| Parâmetro | Descrição |
+|---|---|
+| `uf` | SP |
+| `valor_pedido` | Valor do Pedido |
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "uf" : "SP",
+	            "valor_pedido" : "565.70"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true,
+                "data": [
+                    {
+                        "id": 7,
+                        "uf": "SP",
+                        "transportadora_id": 1,
+                        "percentual_cotacao": "1.20",
+                        "valor_extra": "7.00"
+                    },
+                    {
+                        "id": 8,
+                        "uf": "SP",
+                        "transportadora_id": 2,
+                        "percentual_cotacao": "1.90",
+                        "valor_extra": "10.00"
+                    }
+                ],
+                "message": "Cotações carregadas com sucesso."
+            }
+
+## Comandos úteis
+```sh
+# lista os containers dessa aplicação
+docker-compose ps
+# acessa o terminal do container php
+docker container exec -it app bash
+# para os containers
+docker-compose stop
+# para e remove os containers
+docker-compose down
+```
+
+## Acessando a API
+Por padrão a porta configurada no docker é a 8100 (http://localhost:8100/api).
